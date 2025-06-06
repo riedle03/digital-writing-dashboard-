@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디지털 글쓰기 도구 대시보드</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <h1 class="header__title">디지털 글쓰기 도구 대시보드</h1>
+                <p class="header__subtitle">교육 현장을 위한 스마트 도구 가이드</p>
+                <div class="header__stats">
+                    <div class="stat-card">
+                        <span class="stat-card__number" id="totalTools">0</span>
+                        <span class="stat-card__label">전체 도구</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-card__number" id="totalCategories">0</span>
+                        <span class="stat-card__label">카테고리</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filters and Search -->
+    <section class="filters">
+        <div class="container">
+            <div class="filters__content">
+                <div class="filters__search">
+                    <input type="text" class="form-control" id="searchInput" placeholder="도구명으로 검색하세요...">
+                </div>
+                <div class="filters__categories">
+                    <button class="filter-btn active" data-category="전체">전체</button>
+                    <button class="filter-btn" data-category="AI 글쓰기">AI 글쓰기</button>
+                    <button class="filter-btn" data-category="협업 도구">협업 도구</button>
+                    <button class="filter-btn" data-category="AI 교육도구">AI 교육도구</button>
+                    <button class="filter-btn" data-category="AI 어시스턴트">AI 어시스턴트</button>
+                    <button class="filter-btn" data-category="감정관리">감정관리</button>
+                    <button class="filter-btn" data-category="음성인식">음성인식</button>
+                    <button class="filter-btn" data-category="설문/평가">설문/평가</button>
+                    <button class="filter-btn" data-category="디자인">디자인</button>
+                    <button class="filter-btn" data-category="미술교육">미술교육</button>
+                    <button class="filter-btn" data-category="AI 검색">AI 검색</button>
+                </div>
+                <div class="filters__sort">
+                    <select class="form-control" id="sortSelect">
+                        <option value="default">기본 정렬</option>
+                        <option value="activity-high">활용도 높은순</option>
+                        <option value="activity-low">활용도 낮은순</option>
+                        <option value="difficulty-easy">난이도 쉬운순</option>
+                        <option value="difficulty-hard">난이도 어려운순</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Charts -->
+    <section class="charts">
+        <div class="container">
+            <div class="charts__grid">
+                <div class="chart-container">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>카테고리별 도구 분포</h3>
+                            <div class="chart-wrapper">
+                                <canvas id="categoryChart" width="300" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>활용도 vs 난이도</h3>
+                            <div class="chart-wrapper">
+                                <canvas id="scatterChart" width="300" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Grid -->
+    <main class="main">
+        <div class="container">
+            <div class="tools-header">
+                <h2>도구 목록</h2>
+                <div class="compare-controls">
+                    <button class="btn btn--secondary" id="compareBtn" disabled>선택한 도구 비교 (<span id="selectedCount">0</span>)</button>
+                    <button class="btn btn--outline" id="clearSelection">선택 해제</button>
+                </div>
+            </div>
+            <div class="tools-grid" id="toolsGrid">
+                <!-- Tools will be dynamically generated here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Tool Detail Modal -->
+    <div class="modal" id="toolModal">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title" id="modalTitle"></h2>
+                <button class="modal__close" id="closeModal">×</button>
+            </div>
+            <div class="modal__body" id="modalBody">
+                <!-- Content will be dynamically generated -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Compare Modal -->
+    <div class="modal" id="compareModal">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content modal__content--wide">
+            <div class="modal__header">
+                <h2 class="modal__title">도구 비교</h2>
+                <button class="modal__close" id="closeCompareModal">×</button>
+            </div>
+            <div class="modal__body" id="compareModalBody">
+                <!-- Comparison table will be generated here -->
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/app.js"></script>
+</body>
+</html>
